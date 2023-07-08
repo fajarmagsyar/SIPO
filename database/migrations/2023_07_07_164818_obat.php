@@ -20,10 +20,10 @@ class Obat extends Migration
             $table->string('kode_obat')->nullable();
             $table->string('nama_obat')->nullable();
             $table->string('kemasan')->nullable();
-            $table->integer('stok_awal')->integer();
-            $table->integer('stok_saat_ini')->integer();
-            $table->integer('hdj')->integer();
-            $table->text('keterangan')->integer();
+            $table->integer('stok_awal')->nullable();
+            $table->integer('stok_saat_ini')->nullable();
+            $table->integer('hjd')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
