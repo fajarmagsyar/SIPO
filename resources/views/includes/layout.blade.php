@@ -117,6 +117,12 @@
                         </a>
                     </li>
 
+                    <li class="sidebar-item {{ $title == 'Master Admin' ? 'active' : '' }}">
+                        <a class="sidebar-link" href="/admin-pg/admin">
+                            <i class="align-middle" data-feather="lock"></i> <span class="align-middle">Admin</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-header">
                         Transaksi
                     </li>
