@@ -1,17 +1,14 @@
-@php
-    use App\Models\Obat;
-@endphp
 @extends('includes.layout')
 @section('content')
     <main class="content">
         <div class="container-fluid p-0">
             <div class="mb-4">
-                <a class="btn btn-success border-rr d-inline text-sm float-end" href="/admin-pg/obat/create">
+                <a class="btn btn-success border-rr d-inline text-sm float-end" href="{{ $link_tambah }}">
                     + Tambah Data
                 </a>
-                <h1 class="h3 mb-3 d-inline"><strong>Master Obat</strong></h1>
+                <h1 class="h3 mb-3 d-inline"><strong>{{ $title }}</strong></h1>
                 <div class="text-sm text-muted mt-1">
-                    Olah Data Obat
+                    Halaman untuk mengolah data batch untuk obat
                 </div>
             </div>
 
@@ -20,42 +17,41 @@
                     <div class="card p-3">
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-sm-12 mb-4">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" placeholder="Cari kode obat..."
+                                            aria-label="Cari kode obat" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button"><i class="align-middle"
+                                                    data-feather="search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="table-responsive">
                                         <table class="table dt">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center align-top">No</th>
-                                                    <th class="text-center align-top">Nama Obat</th>
-                                                    <th class="text-center align-top">Kemasan</th>
-                                                    <th class="text-center align-top">Stok</th>
-                                                    <th class="text-center align-top">HJD <br><span
-                                                            class="text-muted text-sm">Rp.</span></th>
-                                                    <th class="text-center align-top text-wrap w-50">Keterangan</th>
-                                                    <th class="text-center align-top text-wrap w-50">Batch <br><span
-                                                            class="text-muted text-sm">(Klik untuk detail)</span></th>
-                                                    <th></th>
+                                                    <th class="align-top">No Batch</th>
+                                                    <th class="align-top">Obat</th>
+                                                    <th class="align-top">Kadaluarsa</th>
+                                                    <th class="text-center"><i class="align-middle"
+                                                            data-feather="settings"></i></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($data as $no => $r)
                                                     <tr>
-                                                        <th class="text-center">{{ $no = $no + 1 }}</th>
+                                                        <th class="text-center align-middle">{{ $no = $no + 1 }}</th>
+                                                        <td><strong>{{ $r->no_batch }}</strong> <br> <span
+                                                                class="text-sm text-muted">{{ $r->created_at }}</span></td>
+
                                                         <td><strong>{{ $r->nama_obat }}</strong> <br> <span
                                                                 class="text-sm text-muted">{{ $r->kode_obat }}</span></td>
-                                                        <td>{{ $r->kemasan }}</td>
-                                                        <td>{{ $r->stok_awal }}</td>
-                                                        <td class="text-end">{{ number_format($r->hjd) }}</td>
-                                                        <td><?php echo $r->keterangan == null ? "<center><div class='badge bg-secondary border-rr px-3'>Tidak ada</div></center>" : $r->keterangan; ?>
-                                                        </td>
+                                                        <td><i class="align-middle" data-feather="calendar"></i>
+                                                            {{ $r->kadaluarsa }}</td>
                                                         <td class="text-center">
-                                                            <a href="/admin-pg/batch/?obat={{ $r->obat_id }}">
-                                                                <div class="badge bg-primary border-rr px-3 py-1">
-                                                                    {{ Obat::countBatch($r->obat_id) }} Batch
-                                                                </div>
-                                                            </a>
-                                                        </td>
-                                                        <td>
                                                             <div class="dropdown">
                                                                 <div type="button" id="dropdownMenuButton2"
                                                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,10 +62,10 @@
                                                                 <ul class="dropdown-menu dropdown-menu-dark"
                                                                     aria-labelledby="dropdownMenuButton2">
                                                                     <li><a class="dropdown-item"
-                                                                            href="/admin-pg/obat/{{ $r->obat_id }}/edit">Sunting</a>
+                                                                            href="/admin-pg/batch/{{ $r->batch_id }}/edit">Sunting</a>
                                                                     </li>
                                                                     <li>
-                                                                        <form action="/admin-pg/obat/{{ $r->obat_id }}"
+                                                                        <form action="/admin-pg/batch/{{ $r->batch_id }}"
                                                                             method="POST" id="form_{{ $no }}">
                                                                             @csrf
                                                                             @method('DELETE')

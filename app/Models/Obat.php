@@ -20,4 +20,11 @@ class Obat extends Model
      * @var string[]
      */
     protected $guarded = ['obat_id'];
+
+    public function countBatch($id)
+    {
+        $b = Batch::where('obat_id', $id)
+            ->count();
+        return $b;
+    }
 }

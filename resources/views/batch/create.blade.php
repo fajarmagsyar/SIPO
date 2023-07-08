@@ -8,7 +8,7 @@
                     <strong>
                         <a class="d-inline text-sm" onclick="history.back()">
                             <i class="align-middle" data-feather="arrow-left"></i>
-                        </a>Edit Master Obat</strong>
+                        </a>Tambah {{ $title }}</strong>
                 </h1>
                 <div class="text-sm mt-1 text-muted">
                     Silahkan masukkan data sesuai dengan form dan format telah disediakan
@@ -18,56 +18,41 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Form Tambah</h5>
-                        </div>
                         <div class="card-body">
-                            <form action="/admin-pg/obat/{{ $data->obat_id }}" id="form" method="POST"
-                                data-parsley-validate="">
+                            <form action="{{ $linkPost }}" id="form" method="POST" data-parsley-validate="">
                                 @csrf
-                                @method('PATCH')
+                                @method('POST')
+                                <h5><strong>Pilih Obat</strong></h5>
+                                <div class="row">
+                                    <div class="col-sm-12 mb-3">
+                                        <select name="obat_id" class="form-control select2" id="">
+                                            @foreach ($obat as $r)
+                                                <option value="{{ $r->obat_id }}">
+                                                    {{ $r->nama_obat . ' | ' . $r->kode_obat }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <h5><strong>Masukkan Detail Batch</strong></h5>
                                 <div class="row">
                                     <div class="col-lg-6 mb-3">
-                                        <label for="kode_obat" class="mb-2">Kode Obat <span
+                                        <label for="no_batch" class="mb-2">No Batch<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-height" name="kode_obat"
-                                            id="kode_obat" value="{{ $data->kode_obat }}" required>
+                                        <input type="text" class="form-control form-height" name="no_batch"
+                                            id="no_batch" required>
                                     </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <label for="nama_obat" class="mb-2">Nama Obat <span
+                                    <div class="col-lg-6 mb-4">
+                                        <label for="kadaluarsa" class="mb-2">Kadaluarsa <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-height" name="nama_obat"
-                                            id="nama_obat" required value="{{ $data->nama_obat }}">
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <label for="kemasan" class="mb-2">Kemasan <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-height" name="kemasan" id="kemasan"
-                                            required value="{{ $data->kemasan }}">
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <label for="stok_awal" class="mb-2">Stok Awal <span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control form-height" name="stok_awal"
-                                            id="stok_awal" readonly disabled placeholder="{{ $data->stok_awal }}">
-                                    </div>
-                                    <div class="col-lg-12 mb-3">
-                                        <label for="hjd" class="mb-2">HJD (Harga Jual Dagang) <span
-                                                class="text-danger">*</span></label>
-                                        <input type="number" class="form-control form-height" name="hjd" id="hjd"
-                                            required value="{{ $data->hjd }}">
-                                        <span class="text-sm text-muted">HJD (Harga Jual Dagang) = HNA (Harga Netto Apotek)
-                                            +
-                                            PPN</span>
-                                    </div>
-                                    <div class="col-lg-12 mb-3">
-                                        <label for="keterangan" class="mb-2">Keterangan</label>
-                                        <textarea name="keterangan" class="form-control" id="keterangan" cols="30" rows="5"
-                                            data-parsley-maxlength="200">{{ $data->keterangan }}</textarea>
-                                        <span class="text-sm text-muted counter" data-parsley-maxlength="200">Maksimal 200
-                                            karakter. <i id="charlen"></i>/200 karakter.</span>
+                                        <input type="text" class="form-control form-height fp-date" name="kadaluarsa"
+                                            id="kadaluarsa" required>
                                     </div>
                                     <div class="col-lg-12">
+                                        <button type="reset" class="btn btn-secondary border-rr d-inline text-sm"
+                                            href="#">
+                                            <i class="align-middle" data-feather="refresh-ccw"></i>
+                                            Reset
+                                        </button>
                                         <div id="submitButton" class="btn btn-primary border-rr d-inline text-sm float-end"
                                             href="#">
                                             Lanjutkan
