@@ -19,7 +19,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table dt">
                                             <thead>
                                                 <tr>
                                                     <th class="text-center align-top">No</th>
