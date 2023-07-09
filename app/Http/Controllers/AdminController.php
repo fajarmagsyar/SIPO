@@ -151,16 +151,9 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $post = [
-            'nama_admin' => $request->input('nama_admin'),
-            'no_hp' => $request->input('no_hp'),
-            'email' => $request->input('email'),
-            'role' => $request->input('role'),
-        ];
-
-        Admin::destroy($id);
+        $post = Admin::find($id);
 
         //Isi Log
         $log = [
@@ -170,6 +163,7 @@ class AdminController extends Controller
         ];
         LogActivity::create($log);
 
+        Admin::destroy($id);
         return redirect('/admin-pg/admin')->with('success', 'Data berhasil dihapus');
     }
 }
