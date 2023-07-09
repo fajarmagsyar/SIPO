@@ -107,9 +107,20 @@ class AdminController extends Controller
             'nama_admin' => $request->input('nama_admin'),
             'no_hp' => $request->input('no_hp'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
             'role' => $request->input('role'),
         ];
+
+        if ($request->input('password')) {
+            $post['password'] = $request->input('password');
+        }
+
+        if ($request->file('img')) {
+            //Bagian penamaan file
+            $doc_name = 'admin/' . 'admin-' . date('Y-m-d_H-i-s') . rand(0, 100000) . '.' . $request->file('img')->getClientOriginalExtension();
+            $post['img'] = $doc_name;
+            //Pemindahan file
+            $request->file('img')->move(public_path('admin'), $doc_name);
+        }
 
         $insert = Admin::find($id)
             ->update($post);

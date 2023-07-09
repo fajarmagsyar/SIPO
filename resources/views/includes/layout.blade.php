@@ -165,7 +165,7 @@
 
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav navbar-align">
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown"
                                 data-bs-toggle="dropdown">
                                 <div class="position-relative">
@@ -311,7 +311,7 @@
                                     <a href="#" class="text-muted">Show all messages</a>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
                                 data-bs-toggle="dropdown">
@@ -320,7 +320,8 @@
 
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                                 data-bs-toggle="dropdown">
-                                <img src="/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" />
+                                <img src="{{ auth()->user()->img !== null ? '/' . auth()->user()->img : '/assets/img/default.jpg' }}"
+                                    class="avatar img-fluid me-1" style="object-fit: cover; border-radius: 10px" />
                                 <span class="text-dark">{{ auth()->user()->nama_admin }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">

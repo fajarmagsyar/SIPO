@@ -70,10 +70,10 @@
                                         <label for="hak" class="mb-2">Hak <span class="text-danger">*</span></label>
                                         <select name="hak" value="{{ $data->hak }}" class="form-control form-height"
                                             id="">
-                                            <option value=""></option>
-                                            <option value="1">Masuk</option>
-                                            <option value="2">Keluar</option>
-                                            <option value="3">Masuk & Keluar</option>
+                                            <option value="1" {{ $data->hak == 1 ? 'selected' : '' }}>Masuk</option>
+                                            <option value="2" {{ $data->hak == 2 ? 'selected' : '' }}>Keluar</option>
+                                            <option value="3" {{ $data->hak == 3 ? 'selected' : '' }}>Masuk & Keluar
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 mb-3">
@@ -81,9 +81,10 @@
                                                 class="text-danger">*</span></label>
                                         <select name="status" value="{{ $data->kode_pelaku }}"
                                             class="form-control form-height" id="">
-                                            <option value=""></option>
-                                            <option value="1">Aktif</option>
-                                            <option value="0">Tidak Aktif</option>
+                                            <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>Aktif
+                                            </option>
+                                            <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Tidak Aktif
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="col-lg-12">

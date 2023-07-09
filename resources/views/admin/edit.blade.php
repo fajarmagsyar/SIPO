@@ -23,7 +23,7 @@
                         </div>
                         <div class="card-body">
                             <form action="/admin-pg/admin/{{ $data->admin_id }}" id="form" method="POST"
-                                data-parsley-validate="">
+                                data-parsley-validate="" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 <div class="row">
@@ -46,21 +46,38 @@
                                             value="{{ $data->email }}" required>
                                     </div>
                                     <div class="col-lg-6 mb-3">
-                                        <label for="password" class="mb-2">Password <span
-                                                class="text-danger">*</span></label>
+                                        <label for="password" class="mb-2">Password </label>
                                         <input type="password" class="form-control form-height" name="password"
-                                            id="password" value="{{ $data->password }}" required>
+                                            id="password" value="">
+                                        <span class="text-muted text-sm"><strong>Kosongi</strong> jika tidak ingin mengganti
+                                            password</span>
                                     </div>
                                     <div class="col-lg-6 mb-3">
                                         <label for="role" class="mb-2">Role <span class="text-danger">*</span></label>
                                         <select name="role" class="form-control form-height" id="">
-                                            <option value=""></option>
-                                            <option value="0">Admin
+                                            <option value="1" {{ $data->role == 1 ? 'seleceted' : '' }}>Super Admin
                                             </option>
-                                            <option value="1">
-                                                Super
-                                                Admin</option>
+                                            <option value="0" {{ $data->role == 0 ? 'seleceted' : '' }}>Admin
+                                            </option>
                                         </select>
+                                    </div>
+                                    <div class="col-sm-12 text-center mt-4">
+                                        <h4><strong>Opsional</strong></h4>
+                                    </div>
+                                    <div class="col-sm-12 mb-3 mt-4">
+                                        <h5><strong>Foto Profil</strong></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 mb-3 text-center">
+                                        <img src="{{ $data->img !== null ? '/' . $data->img : '/assets/img/default.jpg' }}"
+                                            class="border-rr"
+                                            style="width: 50%; box-shadow: 0px 0px 10px #eee; object-fit: cover"
+                                            alt="">
+                                    </div>
+                                    <div class="col-lg-6 mb-3 col-sm-12">
+                                        <label for="role" class="mb-2">Upload Foto</label>
+                                        <input type="file" class="form-control" name="img">
+                                        <span class="text-muted text-sm"><strong>Kosongi</strong> jika tidak ingin mengganti
+                                            foto profil</span>
                                     </div>
                                     <div class="col-lg-12">
                                         <button type="reset" class="btn btn-secondary border-rr d-inline text-sm"

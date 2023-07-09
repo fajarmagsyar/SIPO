@@ -61,16 +61,20 @@
                                                                     <li><a class="dropdown-item"
                                                                             href="/admin-pg/admin/{{ $r->admin_id }}/edit">Sunting</a>
                                                                     </li>
-                                                                    <li>
-                                                                        <form action="/admin-pg/admin/{{ $r->admin_id }}"
-                                                                            method="POST" id="form_{{ $no }}">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            <div class="dropdown-item" type="submit"
-                                                                                onClick="deletePrompt('{{ $r->nama_admin }}', '{{ $no }}')">
-                                                                                Hapus</div>
-                                                                        </form>
-                                                                    </li>
+                                                                    @if (auth()->user()->admin_id !== $r->admin_id)
+                                                                        <li>
+                                                                            <form
+                                                                                action="/admin-pg/admin/{{ $r->admin_id }}"
+                                                                                method="POST"
+                                                                                id="form_{{ $no }}">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <div class="dropdown-item" type="submit"
+                                                                                    onClick="deletePrompt('{{ $r->nama_admin }}', '{{ $no }}')">
+                                                                                    Hapus</div>
+                                                                            </form>
+                                                                        </li>
+                                                                    @endif
                                                                 </ul>
                                                             </div>
                                                         </td>
