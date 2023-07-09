@@ -17,6 +17,7 @@ class PelakuController extends Controller
         $data = [
             'title' => 'Master Pelaku',
             'data' => Pelaku::get(),
+            'link' => 'pelaku',
         ];
         return view('pelaku.index', $data);
     }
@@ -30,6 +31,7 @@ class PelakuController extends Controller
     {
         $data = [
             'title' => 'Master Pelaku',
+            'link' => 'pelaku',
         ];
         return view('pelaku.create', $data);
     }
@@ -79,6 +81,7 @@ class PelakuController extends Controller
         $data = [
             'title' => 'Edit Pelaku',
             'data' => Pelaku::find($id),
+            'link' => 'pelaku',
         ];
         return view('pelaku.edit', $data);
     }

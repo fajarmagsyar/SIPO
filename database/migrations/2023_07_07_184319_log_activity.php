@@ -17,6 +17,7 @@ class LogActivity extends Migration
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('log_activity', function (Blueprint $table) {
             $table->uuid('log_activity_id')->primary();
+            $table->uuid('admin_id')->nullable();
             $table->string('jenis')->nullable();
             $table->text('detail')->nullable();
             $table->timestamps();

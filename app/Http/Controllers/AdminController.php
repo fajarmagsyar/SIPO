@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -17,6 +18,7 @@ class AdminController extends Controller
         $data = [
             'title' => 'Master Admin',
             'data' => Admin::get(),
+            'link' => 'admin',
         ];
         return view('admin.index', $data);
     }
@@ -30,6 +32,7 @@ class AdminController extends Controller
     {
         $data = [
             'title' => 'Master Admin',
+            'link' => 'admin',
         ];
         return view('admin.create', $data);
     }
@@ -42,14 +45,22 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $post = [
             'nama_admin' => $request->input('nama_admin'),
             'no_hp' => $request->input('no_hp'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
             'role' => $request->input('role'),
         ];
 
+        //Bagian penamaan file
+        $doc_name = 'admin/' . 'admin-' . date('Y-m-d_H-i-s') . rand(0, 100000) . '.' . $request->file('img')->getClientOriginalExtension();
+
+        $post['img'] = $doc_name;
+
+        //Pemindahan file
+        $request->file('img')->move(public_path('admin'), $doc_name);
         $insert = Admin::create($post)
             ->getAttributes();
 
@@ -78,6 +89,7 @@ class AdminController extends Controller
         $data = [
             'title' => 'Edit Admin',
             'data' => Admin::find($id),
+            'link' => 'admin',
         ];
         return view('admin.edit', $data);
     }

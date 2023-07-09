@@ -22,6 +22,7 @@ class Transaksi extends Migration
             $table->string('jenis')->nullable();
             $table->string('detail')->nullable();
             $table->string('keterangan')->nullable();
+            $table->string('jumlah')->nullable();
             $table->uuid('created_by')->nullable();
             $table->uuid('updated_by')->nullable();
             $table->timestamps();

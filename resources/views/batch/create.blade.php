@@ -25,9 +25,12 @@
                                 <h5><strong>Pilih Obat</strong></h5>
                                 <div class="row">
                                     <div class="col-sm-12 mb-3">
-                                        <select name="obat_id" class="form-control select2" id="">
+                                        <select name="obat_id"
+                                            class="form-control select2 {{ $obat_id !== '' ? 'disabled' : '' }}"
+                                            id="">
                                             @foreach ($obat as $r)
-                                                <option value="{{ $r->obat_id }}">
+                                                <option value="{{ $r->obat_id }}"
+                                                    {{ $obat_id == $r->obat_id ? 'selected' : '' }}>
                                                     {{ $r->nama_obat . ' | ' . $r->kode_obat }}</option>
                                             @endforeach
                                         </select>

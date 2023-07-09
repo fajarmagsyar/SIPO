@@ -17,6 +17,7 @@ class BatchController extends Controller
     {
         $data = [
             'title' => 'Master Batch',
+            'link' => 'batch',
             'link_tambah' => '/admin-pg/batch/create',
             'data' =>  $request->query('obat') !== null ?  Batch::where('batch.obat_id', $request->query('obat'))->join('obat', 'obat.obat_id', 'batch.obat_id')->get() : Batch::join('obat', 'obat.obat_id', '=', 'batch.obat_id')->get(),
         ];
@@ -28,12 +29,14 @@ class BatchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $data = [
             'title' => 'Master Batch',
+            'link' => 'batch',
             'obat' => Obat::get(),
-            'linkPost' => '/admin-pg/batch/'
+            'linkPost' => '/admin-pg/batch/',
+            'obat_id' => $request->query('id') !== null ? $request->query('id') : '',
         ];
         return view('batch.create', $data);
     }
@@ -81,6 +84,7 @@ class BatchController extends Controller
         $obat = Obat::find($batch->obat_id);
         $data = [
             'title' => 'Edit Master Batch',
+            'link' => 'batch',
             'data' => $batch,
             'obat' => $obat,
             'linkPost' => '/admin-pg/batch/' . $batch->batch_id

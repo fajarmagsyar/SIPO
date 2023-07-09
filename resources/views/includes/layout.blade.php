@@ -101,26 +101,26 @@
                         Utama
                     </li>
 
-                    <li class="sidebar-item {{ $title == 'Dashboard' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ $link == 'dashboard' ? 'active' : '' }}">
                         <a class="sidebar-link" href="/admin-pg">
                             <i class="align-middle" data-feather="sliders"></i> <span
                                 class="align-middle">Dashboard</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ $title == 'Master Obat' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ $link == 'obat' ? 'active' : '' }}">
                         <a class="sidebar-link" href="/admin-pg/obat">
                             <i class="align-middle" data-feather="database"></i> <span class="align-middle">Obat</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ $title == 'Master Pelaku' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ $link == 'pelaku' ? 'active' : '' }}">
                         <a class="sidebar-link" href="/admin-pg/pelaku">
                             <i class="align-middle" data-feather="users"></i> <span class="align-middle">Pelaku</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ $title == 'Master Admin' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ $link == 'admin' ? 'active' : '' }}">
                         <a class="sidebar-link" href="/admin-pg/admin">
                             <i class="align-middle" data-feather="lock"></i> <span class="align-middle">Admin</span>
                         </a>
@@ -130,13 +130,13 @@
                         Transaksi
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link {{ $title == 'Batch' ? 'active' : '' }}" href="/admin-pg/batch">
+                    <li class="sidebar-item {{ $link == 'batch' ? 'active' : '' }}">
+                        <a class="sidebar-link " href="/admin-pg/batch">
                             <i class="align-middle" data-feather="calendar"></i> <span class="align-middle">Batch</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item {{ $title == 'Transaksi' ? 'active' : '' }}">
+                    <li class="sidebar-item {{ $link == 'transaksi' ? 'active' : '' }}">
                         <a class="sidebar-link" href="/admin-pg/transaksi">
                             <i class="align-middle" data-feather="truck"></i> <span class="align-middle">Transaksi
                                 Obat</span>
@@ -145,21 +145,11 @@
 
                     <li class="sidebar-header">
                         Lain-lain
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link {{ $title == 'Settings' ? 'active' : '' }}" href="/admin-pg/settings">
-                            <i class="align-middle" data-feather="settings"></i> <span
-                                class="align-middle">Settings</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link {{ $title == 'Log Activity' ? 'active' : '' }}"
-                            href="/admin-pg/log-activity">
-                            <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Log
-                                Activity</span>
-                        </a>
+                    </li <li class="sidebar-item">
+                    <a class="sidebar-link {{ $link == 'log' ? 'active' : '' }}" href="/admin-pg/log-activity">
+                        <i class="align-middle" data-feather="activity"></i> <span class="align-middle">Log
+                            Activity</span>
+                    </a>
                     </li>
 
 
@@ -331,12 +321,13 @@
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
                                 data-bs-toggle="dropdown">
                                 <img src="/assets/img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" />
-                                <span class="text-dark">Charles Hall</span>
+                                <span class="text-dark">{{ auth()->user()->nama_admin }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="/admin-pg/akun-saya"><i class="align-middle me-1"
-                                        data-feather="user"></i> Akun Saya</a>
-                                <a class="dropdown-item" href="/admin-pg/activity-log?admin_id"><i
+                                <a class="dropdown-item" href="/admin-pg/akun-saya/{{ auth()->user()->admin_id }}"><i
+                                        class="align-middle me-1" data-feather="user"></i> Akun Saya</a>
+                                <a class="dropdown-item"
+                                    href="/admin-pg/activity-log?admin_id={{ auth()->user()->admin_id }}"><i
                                         class="align-middle me-1" data-feather="pie-chart"></i> Aktivitas Saya</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout">Log out</a>
@@ -615,6 +606,7 @@
                 placeholder: 'Pilih kemasan',
                 allowClear: true,
             });
+            $('.select2-nc').select2();
             $('.dt').DataTable({
                 language: {
                     "emptyTable": "Tidak ada data yang tersedia pada tabel ini",

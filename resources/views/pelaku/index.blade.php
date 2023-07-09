@@ -38,22 +38,20 @@
                                                                 class="text-sm text-muted">{{ $r->kode_pelaku }}</span></td>
                                                         <td class="text-center">{{ $r->kategori }}</td>
                                                         <td class="text-center">
-                                                            <? php
-                                                                    if ( $r->hak  == 1){
-                                                                        echo('Masuk');
-                                                                     }
-                                                                    elseif ( $r->hak  == 2) {
-                                                                        echo('Keluar');
-                                                                    }
-                                                                    elseif ( $r->hak  == 3) {
-                                                                        echo('Masuk & Keluar');
-                                                                    }
-                                                                ?>
+                                                            <?php if ($r->hak == 1) {
+                                                                echo 'Masuk';
+                                                            } elseif ($r->hak == 2) {
+                                                                echo 'Keluar';
+                                                            } elseif ($r->hak == 3) {
+                                                                echo 'Masuk & Keluar';
+                                                            }
+                                                            ?>
                                                         </td>
                                                         <td class="text-center">
                                                             <a href="#">
-                                                                <div class="badge bg-primary border-rr px-3 py-1">
-                                                                    {{ $r->status }}
+                                                                <div
+                                                                    class="badge bg-{{ $r->status == 1 ? 'success' : 'danger' }} border-rr px-3 py-1">
+                                                                    {{ $r->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
                                                                 </div>
                                                             </a>
                                                         </td>

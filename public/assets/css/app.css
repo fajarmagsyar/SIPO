@@ -13402,3 +13402,7 @@ span.flatpickr-weekday {
 .select2-container *:focus {
     outline: none;
 }
+
+.putar-balik {
+    transform: scale(-1, 1);
+}

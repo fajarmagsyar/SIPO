@@ -37,7 +37,8 @@
                         <div class="card border-rr">
                             <div class="card-body">
                                 <div class="m-sm-3">
-                                    <form>
+                                    <form action="/auth" method="POST">
+                                        @csrf
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
                                             <input class="form-control form-control-lg" type="email" name="email" />
@@ -47,6 +48,11 @@
                                             <input class="form-control form-control-lg" type="password"
                                                 name="password" />
                                         </div>
+                                        @if (session()->has('error'))
+                                            <div class="mb-3">
+                                                <div class="text-danger">{{ session('error') }}</div>
+                                            </div>
+                                        @endif
                                         <div>
                                             <div class="form-check align-items-center">
                                                 <input id="customControlInline" type="checkbox" class="form-check-input"
@@ -56,14 +62,14 @@
                                             </div>
                                         </div>
                                         <div class="d-grid gap-2 mt-3">
-                                            <a href="index.html" class="btn btn-lg btn-primary">Masuk</a>
+                                            <button type="submit" class="btn btn-lg btn-primary">Masuk</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mb-1">
-                            Apkah anda mengalami masalah? <a href="pages-sign-up.html">Hubungi Admin</a>
+                            Apkah anda mengalami kendala? <a href="pages-sign-up.html">Hubungi Admin</a>
                         </div>
                         <div class="text-center mb-3">
                             SIPO Rote &copy; {{ date('Y') }}

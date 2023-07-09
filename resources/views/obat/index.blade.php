@@ -44,7 +44,10 @@
                                                         <td><strong>{{ $r->nama_obat }}</strong> <br> <span
                                                                 class="text-sm text-muted">{{ $r->kode_obat }}</span></td>
                                                         <td>{{ $r->kemasan }}</td>
-                                                        <td>{{ $r->stok_awal }}</td>
+                                                        <td class="text-end"><strong>{{ $r->stok_saat_ini }}</strong> <br>
+                                                            <span class="text-sm text-muted"
+                                                                style="font-size: 10px">{{ $r->stok_awal }}</span>
+                                                        </td>
                                                         <td class="text-end">{{ number_format($r->hjd) }}</td>
                                                         <td><?php echo $r->keterangan == null ? "<center><div class='badge bg-secondary border-rr px-3'>Tidak ada</div></center>" : $r->keterangan; ?>
                                                         </td>

@@ -24,29 +24,31 @@
                                                 <tr>
                                                     <th class="text-center align-top">No</th>
                                                     <th class="text-center align-top">Foto</th>
-                                                    <th class="text-center align-top">Nama Admin</th>
-                                                    <th class="text-center align-top">Role</th>
-                                                    <th></th>
+                                                    <th class="text-center align-top">Detail Admin</th>
+                                                    <th class="align-top">Role</th>
+                                                    <th class="text-center"><i class="align-middle"
+                                                            data-feather="settings"></i></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($data as $no => $r)
                                                     <tr>
-                                                        <th class="text-center">{{ $no = $no + 1 }}</th>
-                                                        <td><img src="../asset/img-admin/" class="rounded"
-                                                                alt="Profil Admin">{{ $r->img }}</td>
+                                                        <th class="text-center align-middle">{{ $no = $no + 1 }}</th>
+                                                        <td class="text-center"><img
+                                                                src="{{ $r->img !== null ? '/' . $r->img : '/assets/img/default.jpg' }}"
+                                                                style="height: 100px; width: 100px; object-fit: cover"
+                                                                class="border-rr" alt="Profil Admin">
+                                                        </td>
                                                         <td><strong>{{ $r->nama_admin }}</strong> <br>
                                                             <span class="text-sm text-muted">{{ $r->no_hp }}</span><br>
                                                             <span class="text-sm text-muted">{{ $r->email }}</span>
                                                         </td>
-                                                        <td class="text-center">
-                                                            <a href="#">
-                                                                <div class="badge bg-primary border-rr px-3 py-1">
-                                                                    {{ $r->role }}
-                                                                </div>
-                                                            </a>
-                                                        </td>
                                                         <td>
+                                                            {!! $r->role == 1
+                                                                ? "<span class='text-success'>● Superadmin</span>"
+                                                                : "<span class='text-primary'>● Admin</span>" !!}
+                                                        </td>
+                                                        <td class="text-center">
                                                             <div class="dropdown">
                                                                 <div type="button" id="dropdownMenuButton2"
                                                                     data-bs-toggle="dropdown" aria-expanded="false">

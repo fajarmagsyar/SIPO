@@ -22,7 +22,8 @@
                             <h5 class="card-title mb-0">Form Tambah</h5>
                         </div>
                         <div class="card-body">
-                            <form action="/admin-pg/admin" id="form" method="POST" data-parsley-validate="">
+                            <form action="/admin-pg/admin" id="form" enctype="multipart/form-data" method="POST"
+                                data-parsley-validate="">
                                 @csrf
                                 @method('POST')
                                 <div class="row">
@@ -57,6 +58,19 @@
                                             <option value="0">Admin</option>
                                             <option value="1">Super Admin</option>
                                         </select>
+                                    </div>
+                                    <div class="col-sm-12 mb-3 mt-4">
+                                        <h5><strong>Foto Profil</strong></h5>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 mb-3 text-center">
+                                        <img src="/assets/img/default.jpg" class="border-rr"
+                                            style="width: 50%; box-shadow: 0px 0px 10px #eee; object-fit: cover"
+                                            alt="">
+                                    </div>
+                                    <div class="col-lg-6 mb-3 col-sm-12">
+                                        <label for="role" class="mb-2">Upload Foto <span
+                                                class="text-danger">*</span></label>
+                                        <input type="file" class="form-control" name="img">
                                     </div>
                                     <div class="col-lg-12">
                                         <button type="reset" class="btn btn-secondary border-rr d-inline text-sm"

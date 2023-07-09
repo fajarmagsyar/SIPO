@@ -3,7 +3,7 @@
     <main class="content">
         <div class="container-fluid p-0">
 
-            <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+            <h1 class="h3 mb-3"><strong>Statistik</strong> SIPO</h1>
 
             <div class="row">
                 <div class="col-xl-6 col-xxl-5 d-flex">
@@ -14,12 +14,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col mt-0">
-                                                <h5 class="card-title">Sales</h5>
+                                                <h5 class="card-title">Banyak Obat</h5>
                                             </div>
 
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="truck"></i>
+                                                    <i class="align-middle" data-feather="database"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -35,12 +35,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col mt-0">
-                                                <h5 class="card-title">Visitors</h5>
+                                                <h5 class="card-title">Banyak Batch</h5>
                                             </div>
 
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="users"></i>
+                                                    <i class="align-middle" data-feather="calendar"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -58,12 +58,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col mt-0">
-                                                <h5 class="card-title">Earnings</h5>
+                                                <h5 class="card-title">Jumlah Pelaku</h5>
                                             </div>
 
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="dollar-sign"></i>
+                                                    <i class="align-middle" data-feather="users"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -79,12 +79,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col mt-0">
-                                                <h5 class="card-title">Orders</h5>
+                                                <h5 class="card-title">Total Transaksi</h5>
                                             </div>
 
                                             <div class="col-auto">
                                                 <div class="stat text-primary">
-                                                    <i class="align-middle" data-feather="shopping-cart"></i>
+                                                    <i class="align-middle" data-feather="truck"></i>
                                                 </div>
                                             </div>
                                         </div>

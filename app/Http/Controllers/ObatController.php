@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogActivity;
 use App\Models\Obat;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,12 @@ class ObatController extends Controller
      */
     public function index()
     {
+        // dd($_SERVER['HTTP_USER_AGENT']);
+        // $_SERVER['REMOTE_ADDR']; 
         $data = [
             'title' => 'Master Obat',
             'data' => Obat::get(),
+            'link' => 'obat',
         ];
         return view('obat.index', $data);
     }
@@ -30,6 +34,7 @@ class ObatController extends Controller
     {
         $data = [
             'title' => 'Master Obat',
+            'link' => 'obat',
         ];
         return view('obat.create', $data);
     }
@@ -55,7 +60,16 @@ class ObatController extends Controller
         $insert = Obat::create($post)
             ->getAttributes();
 
-        return redirect('/admin-pg/batch?id=' . $insert['obat_id'])->with('success', 'Data berhasil ditambahkan');
+
+        //Isi Log
+        $log = [
+            'jenis' => '<strong>Tambah Obat <strong> => ' . $post['kode_obat'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
+        return redirect('/admin-pg/batch/create?id=' . $insert['obat_id'])->with('success', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -80,6 +94,7 @@ class ObatController extends Controller
         $data = [
             'title' => 'Edit Obat',
             'data' => Obat::find($id),
+            'link' => 'obat',
         ];
         return view('obat.edit', $data);
     }

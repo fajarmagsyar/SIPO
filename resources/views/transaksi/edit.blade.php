@@ -8,7 +8,7 @@
                     <strong>
                         <a class="d-inline text-sm" onclick="history.back()">
                             <i class="align-middle" data-feather="arrow-left"></i>
-                        </a>Tambah Master Pelaku</strong>
+                        </a>Tambah {{ $title }}</strong>
                 </h1>
                 <div class="text-sm mt-1 text-muted">
                     Silahkan masukkan data sesuai dengan form dan format telah disediakan
@@ -18,58 +18,31 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Form Tambah</h5>
-                        </div>
                         <div class="card-body">
-                            <form action="/admin-pg/pelaku" id="form" method="POST" data-parsley-validate="">
+                            <form action="{{ $linkPost }}" id="form" method="POST" data-parsley-validate="">
                                 @csrf
-                                @method('POST')
+                                @method('PATCH')
+                                <h5><strong>Pilih Obat</strong></h5>
+                                <div class="row">
+                                    <div class="col-sm-12 mb-4">
+                                        <input type="text" class="form-control" readonly disabled
+                                            placeholder="{{ $obat->nama_obat }} | {{ $obat->kode_obat }}">
+                                        <span class="text-muted text-sm">Kode obat tidak dapat diganti</span>
+                                    </div>
+                                </div>
+                                <h5><strong>Masukkan Detail Batch</strong></h5>
                                 <div class="row">
                                     <div class="col-lg-6 mb-3">
-                                        <label for="kode_pelaku" class="mb-2">Kode Pelaku <span
+                                        <label for="no_batch" class="mb-2">No Batch<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-height" name="kode_pelaku"
-                                            id="kode_pelaku" required>
+                                        <input type="text" class="form-control form-height" name="no_batch"
+                                            id="no_batch" required value="{{ $data->no_batch }}">
                                     </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <label for="nama_pelaku" class="mb-2">Nama Pelaku <span
+                                    <div class="col-lg-6 mb-4">
+                                        <label for="kadaluarsa" class="mb-2">Kadaluarsa <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control form-height" name="nama_pelaku"
-                                            id="nama_pelaku" required>
-                                    </div>
-                                    <div class="col-lg-12 mb-3">
-                                        <label for="kategori" class="mb-2">Kategori <span
-                                                class="text-danger">*</span></label>
-                                        <select name="kategori" class="form-control select2-nc form-height" id="">
-                                            <option value=""></option>
-                                            <option value="Apotek">Apotek</option>
-                                            <option value="Klinik">Klinik</option>
-                                            <option value="Pabrik">Pabrik</option>
-                                            <option value="PBF">PBF</option>
-                                            <option value="Puskesmas">Puskesmas</option>
-                                            <option value="Retur">Retur</option>
-                                            <option value="RS">RS</option>
-                                            <option value="Status Pemerintah">Status Pemerintah</option>
-                                            <option value="Toko Obat">Toko Obat</option>
-                                            <option value="Lainnya">Lainnya</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <label for="hak" class="mb-2">Hak <span class="text-danger">*</span></label>
-                                        <select name="hak" class="form-control form-height" id="">
-                                            <option value="1">Masuk</option>
-                                            <option value="2">Keluar</option>
-                                            <option value="3">Masuk & Keluar</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-6 mb-3">
-                                        <label for="status" class="mb-2">Status <span
-                                                class="text-danger">*</span></label>
-                                        <select name="status" class="form-control form-height" id="">
-                                            <option value="1">Aktif</option>
-                                            <option value="0">Tidak Aktif</option>
-                                        </select>
+                                        <input type="text" class="form-control form-height fp-date" name="kadaluarsa"
+                                            id="kadaluarsa" required value="{{ $data->kadaluarsa }}">
                                     </div>
                                     <div class="col-lg-12">
                                         <button type="reset" class="btn btn-secondary border-rr d-inline text-sm"
