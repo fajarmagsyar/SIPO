@@ -79,8 +79,9 @@ class HomeController extends Controller
         $data = [
             'title' => 'Log Activity',
             'link' => 'log',
-            'data' => LogActivity::select(['admin.email', 'admin.nama_admin', 'admin.no_hp', 'log_activity.*'])
+            'data' => LogActivity::select(['admin.email', 'admin.nama_admin', 'admin.no_hp', 'log_activity.*', 'admin.img'])
                 ->join('admin', 'admin.admin_id', 'log_activity.admin_id')
+                ->orderBy('log_activity.created_at', 'DESC')
                 ->get(),
         ];
         return view('log', $data);

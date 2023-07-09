@@ -20,6 +20,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="text-center align-top">No</th>
+                                                    <th class="align-top"></th>
                                                     <th class="align-top">Admin</th>
                                                     <th class="align-top text-center">Aktifitas</th>
                                                     <th class="align-top">Detail</th>
@@ -30,9 +31,22 @@
                                                 @foreach ($data as $no => $r)
                                                     <tr>
                                                         <th class="text-center align-middle">{{ $no = $no + 1 }}</th>
-                                                        <td><strong>{{ $r->nama_admin }}</strong> <br> <span
-                                                                class="text-sm text-muted">{{ $r->email }} <br>
-                                                                {{ $r->no_hp }}</span></td>
+                                                        <td>
+                                                            <div class="d-inline float-start">
+                                                                <img src="{{ $r->img !== null ? '/' . $r->img : '/assets/img/default.jpg' }}"
+                                                                    style="width: 36px; height: 36px; object-fit: cover"
+                                                                    class="border-rr" alt="">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div d-inline>
+                                                                <strong>{{ $r->nama_admin }}</strong> <br>
+                                                                <span class="text-sm text-muted">
+                                                                    {{ $r->email }} <br>
+                                                                    {{ $r->no_hp }}
+                                                                </span>
+                                                            </div>
+                                                        </td>
 
                                                         <td class="text-center">{{ $r->jenis }} <br>
                                                             <span class="text-sm text-muted">{{ $r->kode_obat }}</span>

@@ -139,25 +139,17 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
-        $obat = Obat::find($id);
+        $post = Obat::find($id);
 
+        //Isi Log
         $log = [
-            'jenis' => 'Hapus Obat => ' . $obat->kode_obat,
+            'jenis' => 'Hapus Obat => ' . $post->kode_obat,
             'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
             'admin_id' => auth()->user()->admin_id,
         ];
         LogActivity::create($log);
 
         Obat::destroy($id);
-
-        //Isi Log
-        $log = [
-            'jenis' => 'Hapus Obat => ' . $post['kode_obat'],
-            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
-            'admin_id' => auth()->user()->admin_id,
-        ];
-        LogActivity::create($log);
-
         return redirect('/admin-pg/obat')->with('success', 'Data berhasil dihapus');
     }
 }
