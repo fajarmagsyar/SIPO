@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogActivity;
 use App\Models\Pelaku;
 use Illuminate\Http\Request;
 
@@ -56,6 +57,14 @@ class PelakuController extends Controller
         $insert = Pelaku::create($post)
             ->getAttributes();
 
+        //Isi Log
+        $log = [
+            'jenis' => 'Tambah Pelaku => ' . $post['kode_pelaku'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/pelaku')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -107,6 +116,14 @@ class PelakuController extends Controller
         $insert = Pelaku::find($id)
             ->update($post);
 
+        //Isi Log
+        $log = [
+            'jenis' => 'Ubah Pelaku => ' . $post['kode_pelaku'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/pelaku')->with('success', 'Data berhasil diubah');
     }
 
@@ -116,9 +133,27 @@ class PelakuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $post = [
+            'kode_pelaku' => $request->input('kode_pelaku'),
+            'nama_pelaku' => $request->input('nama_pelaku'),
+            'kemasan' => $request->input('kemasan'),
+            'kategori' => $request->input('kategori'),
+            'hak' => $request->input('hak'),
+            'status' => $request->input('status'),
+        ];
+
         Pelaku::destroy($id);
+
+        //Isi Log
+        $log = [
+            'jenis' => 'Hapus Pelaku => ' . $post['kode_pelaku'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/pelaku')->with('success', 'Data berhasil dihapus');
     }
 }
