@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LogActivity;
 use App\Models\Obat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ObatController extends Controller
 {
@@ -61,7 +62,7 @@ class ObatController extends Controller
             ->getAttributes();
 
 
-        //Isi Log
+        //Isi Log 
         $log = [
             'jenis' => '<strong>Tambah Obat <strong> => ' . $post['kode_obat'],
             'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
@@ -119,6 +120,14 @@ class ObatController extends Controller
         $insert = Obat::find($id)
             ->update($post);
 
+        //Isi Log
+        $log = [
+            'jenis' => 'Ubah Obat => ' . $post['kode_obat'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/obat')->with('success', 'Data berhasil diubah');
     }
 
@@ -130,7 +139,20 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
+        $post = [
+            Obat::select(['obat.kode_obat'])
+        ];
+
         Obat::destroy($id);
+
+        //Isi Log
+        $log = [
+            'jenis' => 'Hapus Obat => ' . $post['kode_obat'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/obat')->with('success', 'Data berhasil dihapus');
     }
 }

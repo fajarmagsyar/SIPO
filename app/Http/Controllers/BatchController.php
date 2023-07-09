@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogActivity;
 use App\Models\Batch;
 use App\Models\Obat;
 use Illuminate\Http\Request;
@@ -58,6 +59,14 @@ class BatchController extends Controller
         $insert = Batch::create($post)
             ->getAttributes();
 
+        //Isi Log
+        $log = [
+            'jenis' => 'Tambah Batch => ' . $post['no_batch'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/batch')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -108,6 +117,14 @@ class BatchController extends Controller
 
         $insert = Batch::find($id)
             ->update($post);
+
+        //Isi Log
+        $log = [
+            'jenis' => 'Ubah Batch => ' . $post['no_batch'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
 
         return redirect('/admin-pg/batch')->with('success', 'Data berhasil diubah');
     }
