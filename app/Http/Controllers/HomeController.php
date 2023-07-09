@@ -46,6 +46,16 @@ class HomeController extends Controller
         }
         return redirect('/admin-pg/akun-saya/' . $admin->admin_id)->with('error', 'Password lama anda salah');
     }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
     public function auth(Request $request)
     {
 
