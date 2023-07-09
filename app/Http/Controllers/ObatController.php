@@ -63,7 +63,7 @@ class ObatController extends Controller
 
         //Isi Log
         $log = [
-            'jenis' => '<strong>Tambah Obat <strong> => ' . $post['kode_obat'],
+            'jenis' => 'Tambah Obat => ' . $post['kode_obat'],
             'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
             'admin_id' => auth()->user()->admin_id,
         ];

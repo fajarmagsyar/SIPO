@@ -26,7 +26,10 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'signIn']);
 Route::get('/admin-pg', [HomeController::class, 'dashboard']);
 Route::post('/auth', [HomeController::class, 'auth']);
+Route::post('/ganti-password', [HomeController::class, 'gantiPassword']);
 Route::get('/admin-pg/log-activity', [HomeController::class, 'logActivity']);
+Route::get('/admin-pg/log-activity/{id}', [HomeController::class, 'logActivityById']);
+Route::get('/admin-pg/akun-saya/{id}', [HomeController::class, 'akunSaya']);
 
 Route::resource('/admin-pg/obat', ObatController::class);
 Route::resource('/admin-pg/batch', BatchController::class);
