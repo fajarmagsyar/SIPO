@@ -133,18 +133,9 @@ class PelakuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $post = [
-            'kode_pelaku' => $request->input('kode_pelaku'),
-            'nama_pelaku' => $request->input('nama_pelaku'),
-            'kemasan' => $request->input('kemasan'),
-            'kategori' => $request->input('kategori'),
-            'hak' => $request->input('hak'),
-            'status' => $request->input('status'),
-        ];
-
-        Pelaku::destroy($id);
+        $post = Pelaku::find($id);
 
         //Isi Log
         $log = [
@@ -154,6 +145,7 @@ class PelakuController extends Controller
         ];
         LogActivity::create($log);
 
+        Pelaku::destroy($id);
         return redirect('/admin-pg/pelaku')->with('success', 'Data berhasil dihapus');
     }
 }

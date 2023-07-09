@@ -137,6 +137,16 @@ class BatchController extends Controller
      */
     public function destroy($id)
     {
+        $post = Batch::find($id);
+
+        //Isi Log
+        $log = [
+            'jenis' => 'Hapus Batch => ' . $post['no_batch'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         Batch::destroy($id);
         return redirect('/admin-pg/batch')->with('success', 'Data berhasil dihapus');
     }
