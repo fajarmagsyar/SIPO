@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogActivity;
 use App\Models\Batch;
 use App\Models\Obat;
 use App\Models\Pelaku;
@@ -80,6 +81,14 @@ class TransaksiController extends Controller
 
         $insert = Transaksi::create($post)
             ->getAttributes();
+
+        //Isi Log
+        $log = [
+            'jenis' => 'Tambah Transaksi => ' . $post['jumlah'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
 
         return redirect('/admin-pg/transaksi')->with('success', 'Data berhasil ditambahkan');
     }

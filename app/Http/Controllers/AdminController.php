@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogActivity;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -64,6 +65,14 @@ class AdminController extends Controller
         $insert = Admin::create($post)
             ->getAttributes();
 
+        //Isi Log
+        $log = [
+            'jenis' => 'Tambah Admin => ' . $post['nama_admin'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/admin')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -125,6 +134,14 @@ class AdminController extends Controller
         $insert = Admin::find($id)
             ->update($post);
 
+        //Isi Log
+        $log = [
+            'jenis' => 'Ubah Admin => ' . $post['nama_admin'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/admin')->with('success', 'Data berhasil diubah');
     }
 
@@ -134,9 +151,25 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $post = [
+            'nama_admin' => $request->input('nama_admin'),
+            'no_hp' => $request->input('no_hp'),
+            'email' => $request->input('email'),
+            'role' => $request->input('role'),
+        ];
+
         Admin::destroy($id);
+
+        //Isi Log
+        $log = [
+            'jenis' => 'Hapus Admin => ' . $post['nama_admin'],
+            'detail' => "<strong>Device : <br></strong>" . $_SERVER['HTTP_USER_AGENT'] . "<br><strong>IP Address :</strong> " . $_SERVER['REMOTE_ADDR'],
+            'admin_id' => auth()->user()->admin_id,
+        ];
+        LogActivity::create($log);
+
         return redirect('/admin-pg/admin')->with('success', 'Data berhasil dihapus');
     }
 }
