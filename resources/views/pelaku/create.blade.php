@@ -50,7 +50,7 @@
                                             <option value="Puskesmas">Puskesmas</option>
                                             <option value="Retur">Retur</option>
                                             <option value="RS">RS</option>
-                                            <option value="Status Pemerintah">Status Pemerintah</option>
+                                            <option value="Sarana Pemerintah">Sarana Pemerintah</option>
                                             <option value="Toko Obat">Toko Obat</option>
                                             <option value="Lainnya">Lainnya</option>
                                         </select>

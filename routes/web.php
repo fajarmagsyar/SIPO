@@ -4,6 +4,7 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\PelakuController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,14 @@ Route::get('/admin-pg/log-activity', [HomeController::class, 'logActivity'])->mi
 Route::get('/admin-pg/log-activity/{id}', [HomeController::class, 'logActivityById'])->middleware(['check']);
 Route::get('/admin-pg/akun-saya/{id}', [HomeController::class, 'akunSaya'])->middleware(['check']);
 
+//resources
 Route::resource('/admin-pg/obat', ObatController::class)->middleware(['check']);
 Route::resource('/admin-pg/batch', BatchController::class)->middleware(['check']);
 Route::resource('/admin-pg/admin', AdminController::class)->middleware(['check']);
 Route::resource('/admin-pg/pelaku', PelakuController::class)->middleware(['check']);
 Route::resource('/admin-pg/transaksi', TransaksiController::class)->middleware(['check']);
+
+//excel export
+Route::get('/admin-pg/laporan/export', [ExportController::class, 'laporan'])->middleware(['check']);
+Route::get('/admin-pg/laporan/export/query', [ExportController::class, 'laporanByDate'])->middleware(['check']);
+Route::get('/admin-pg/laporan', [ExportController::class, 'index'])->middleware(['check']);

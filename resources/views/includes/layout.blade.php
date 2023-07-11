@@ -90,7 +90,7 @@
                 <div class="sidebar-cta">
                     <div class="sidebar-cta-content">
                         <div class="d-grid">
-                            <a href="upgrade-to-pro.html" class="btn btn-success"><i class="align-middle"
+                            <a href="/admin-pg/laporan/" class="btn btn-success"><i class="align-middle"
                                     data-feather="printer"></i> Laporan</a>
                         </div>
                     </div>
