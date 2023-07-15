@@ -25,6 +25,7 @@
                                                     <th class="text-center align-top">No</th>
                                                     <th class="text-center align-top">Foto</th>
                                                     <th class="text-center align-top">Detail Admin</th>
+                                                    <th class="text-center align-top">Pelaku</th>
                                                     <th class="align-top">Role</th>
                                                     <th class="text-center"><i class="align-middle"
                                                             data-feather="settings"></i></th>
@@ -43,6 +44,8 @@
                                                             <span class="text-sm text-muted">{{ $r->no_hp }}</span><br>
                                                             <span class="text-sm text-muted">{{ $r->email }}</span>
                                                         </td>
+                                                        <td><strong>{{ $r->nama_pelaku }}</strong> <br> <span
+                                                                class="text-sm text-muted">{{ $r->kode_pelaku }}</span></td>
                                                         <td>
                                                             {!! $r->role == 1
                                                                 ? "<span class='text-success'>● Superadmin</span>"
