@@ -17,6 +17,7 @@ class Admin extends Migration
         DB::statement('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
         Schema::create('admin', function (Blueprint $table) {
             $table->uuid('admin_id')->primary();
+            $table->uuid('pelaku_id')->nullable();
             $table->string('nama_admin')->nullable();
             $table->string('no_hp')->nullable();
             $table->string('email')->nullable();
