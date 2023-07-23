@@ -27,6 +27,18 @@
                                 @csrf
                                 @method('POST')
                                 <div class="row">
+                                    <h5><strong>Pilih Pelaku</strong></h5>
+                                    <div class="row">
+                                        <div class="col-sm-12 mb-3">
+                                            <select name="pelaku_id" class="form-control select2" id="">
+                                                @foreach ($pelaku as $r)
+                                                    <option value="{{ $r->pelaku_id }}"
+                                                        {{ $pelaku_id == $r->pelaku_id ? 'selected' : '' }}>
+                                                        {{ $r->nama_pelaku . ' | ' . $r->kode_pelaku }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-6 mb-3">
                                         <label for="nama_admin" class="mb-2">Nama Admin <span
                                                 class="text-danger">*</span></label>
@@ -57,6 +69,7 @@
                                             <option value=""></option>
                                             <option value="0">Admin</option>
                                             <option value="1">Super Admin</option>
+                                            <option value="2">Pelaku</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-12 mb-3 mt-4">

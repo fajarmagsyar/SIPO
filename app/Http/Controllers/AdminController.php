@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LogActivity;
 use App\Models\Admin;
+use App\Models\Pelaku;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,11 +30,13 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $data = [
             'title' => 'Master Admin',
             'link' => 'admin',
+            'pelaku' => Pelaku::get(),
+            'pelaku_id' => $request->query('id') !== null ? $request->query('id') : '',
         ];
         return view('admin.create', $data);
     }
@@ -48,6 +51,7 @@ class AdminController extends Controller
     {
         // dd($request);
         $post = [
+            'pelaku_id' => $request->input('pelaku_id'),
             'nama_admin' => $request->input('nama_admin'),
             'no_hp' => $request->input('no_hp'),
             'email' => $request->input('email'),
